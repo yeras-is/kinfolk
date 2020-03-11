@@ -3,8 +3,8 @@ library core;
 import 'package:core/global_variables.dart';
 import 'service/auth.dart';
 
-/// A Calculator.
-class Calculator {
+class Kinfolk {
+  /// A Calculator.
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
@@ -14,6 +14,8 @@ class Calculator {
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;
   }
+
+  getClient() => Authorization().client;
 
   getToken(String login, String password) =>
       Authorization().getAccessToken(login, password);

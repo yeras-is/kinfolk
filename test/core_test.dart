@@ -6,7 +6,7 @@ import 'package:core/core.dart';
 
 void main() {
   test('adds one to input values', () {
-    final calculator = Calculator();
+    final calculator = Kinfolk();
     expect(calculator.addOne(2), 3);
     expect(calculator.addOne(-7), -6);
     expect(calculator.addOne(0), 1);
@@ -14,7 +14,7 @@ void main() {
   });
 
   test("Global Variables", () {
-    final calculator = Calculator();
+    final calculator = Kinfolk();
     calculator.initializeBaseVariables(
         "http://localhost:8080/test/", "client", "secret");
     expect(GlobalVariables.secret, "secret");
@@ -31,21 +31,17 @@ void main() {
   });
 
   test("Acess Token", () {
-    final calculator = Calculator();
+    final calculator = Kinfolk();
     calculator.initializeBaseVariables(
         "http://localhost:8080/test/", "client", "secret");
     expect(GlobalVariables.secret, "secret");
     expect(GlobalVariables.identifier, "client");
     expect(GlobalVariables.urlEndPoint, "http://localhost:8080/test/");
     expect(calculator.getToken("admin", "admin"), isNotNull);
-
-    calculator.initializeBaseVariables(null, null, null);
-    expect(() => calculator.getToken("admin", "admin"),
-        throwsA(predicate((e) => e is NullOrEmptyArgument)));
   });
 
   test("File Url", () {
-    final calculator = Calculator();
+    final calculator = Kinfolk();
     calculator.initializeBaseVariables(
         "http://localhost:8080/test/", "client", "secret");
     expect(calculator.getToken("admin", "admin"), isNotNull);

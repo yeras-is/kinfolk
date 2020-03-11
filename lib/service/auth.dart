@@ -43,10 +43,19 @@ class Authorization {
     if (exists) {
       var credentials =
           new oauth2.Credentials.fromJson(await credentialsFile.readAsString());
+      try {
+        _client = oauth2.Client(credentials,
+            identifier: GlobalVariables.identifier,
+            secret: GlobalVariables.secret);
+      } on SocketException {
+        return GlobalVariables.connectionTimeCode;
+      } on oauth2.AuthorizationException {
+        return GlobalVariables.accessErrorCode;
+      } on FormatException catch (e) {
+        return e.message;
+      }
       token = _client.credentials.accessToken;
-      return new oauth2.Client(credentials,
-          identifier: GlobalVariables.identifier,
-          secret: GlobalVariables.secret);
+      return _client;
     } else
       return null;
   }
