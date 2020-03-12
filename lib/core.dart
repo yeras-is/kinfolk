@@ -1,6 +1,7 @@
 library core;
 
 import 'package:core/global_variables.dart';
+import 'package:flutter/material.dart';
 import 'service/auth.dart';
 
 class Kinfolk {
@@ -22,4 +23,9 @@ class Kinfolk {
 
   getFileUrl(String fileDescriptorId) =>
       Authorization().getFileUrlByFileDescriptorId(fileDescriptorId);
+
+  getText(String text) => Text(
+        text,
+        style: TextStyle(color: Colors.green, fontSize: 15),
+      );
 }
