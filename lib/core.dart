@@ -24,5 +24,7 @@ class Kinfolk {
       Authorization().getFileUrlByFileDescriptorId(fileDescriptorId);
 
   get serviceUrl => "${GlobalVariables.urlEndPoint}/v2/services/";
+  get queriesUrl => "${GlobalVariables.urlEndPoint}/v2/queries/";
+  get entitiesUrl => "${GlobalVariables.urlEndPoint}/v2/entities/";
 
 }
