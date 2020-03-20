@@ -76,5 +76,5 @@ print("${response2.body}");
 
 
 # Author
-[Yerassyl Maikhanov](https://yeras-is.github.io/) - Enterprise Applications Developer [Linkedin](https://www.linkedin.com/in/yerassyl-maikhanov-52558b185/)
+[Yerassyl Maikhanov](https://yeras-is.github.io/) - Enterprise Applications Developer. [My Linkedin](https://www.linkedin.com/in/yerassyl-maikhanov-52558b185/)
 
