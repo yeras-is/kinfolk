@@ -2,6 +2,12 @@
 
 A new Flutter package for integration with CUBA Platform based backend.
 
+<a href="https://github.com/yeras-is/core/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-APACHE2.0-blue.svg?longCache=true&style=flat-square"></a>
+   <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Built%20for-Flutter-blue.svg?longCache=true&style=flat-square"></a>
+  <a href="https://github.com/Solido/awesome-flutter">
+   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
+</a>
+
 # Features
   - Authorization via the Rest Api using your username and password
   - Storing and reusing Access Token
@@ -67,3 +73,8 @@ var response2 = await client2.post(
 /// printing body of response
 print("${response2.body}");
 ```
+
+
+# Author
+[Yerassyl Maikhanov](https://yeras-is.github.io/) - Enterprise Applications Developer [Linkedin](https://www.linkedin.com/in/yerassyl-maikhanov-52558b185/)
+
