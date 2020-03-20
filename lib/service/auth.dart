@@ -1,11 +1,13 @@
 import 'package:core/global_variables.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
-import 'dart:io';
+import 'dart:io';import 'package:path/path.dart';
+
+
+import 'package:path_provider/path_provider.dart';
 
 /// @author yeras-is
 class Authorization {
   oauth2.Client _client;
-  final credentialsFile = new File("~/.myapp/credentials.json");
   String token;
 
   Future<oauth2.Client> get client async {
@@ -32,11 +34,17 @@ class Authorization {
       return e.message;
     }
     token = _client.credentials.accessToken;
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path,"credentials.json");
+    File credentialsFile = File(path);
     await credentialsFile.writeAsString(_client.credentials.toJson());
     return _client;
   }
 
   getFromSavedCredentials() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path,"credentials.json");
+    File credentialsFile = File(path);
     var exists = await credentialsFile.exists();
     // If the OAuth2 credentials have already been saved from a previous run, we
     // just want to reload them.
