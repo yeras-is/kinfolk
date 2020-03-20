@@ -19,7 +19,7 @@ class Authorization {
 
   getAccessToken(String username, String password) async {
     final authorizationEndpoint =
-        Uri.parse(GlobalVariables.urlEndPoint + "v2/oauth/token?");
+        Uri.parse(GlobalVariables.urlEndPoint + "/rest/v2/oauth/token?");
 
     try {
       _client = await oauth2.resourceOwnerPasswordGrant(
@@ -69,5 +69,5 @@ class Authorization {
   }
 
   getFileUrlByFileDescriptorId(String fileDescriptorId) =>
-      "${GlobalVariables.urlEndPoint}rest/v2/files/$fileDescriptorId?access_token=$token";
+      "${GlobalVariables.urlEndPoint}/rest/v2/files/$fileDescriptorId?access_token=$token";
 }
