@@ -36,7 +36,7 @@ Kinfolk kinfolk = Kinfolk();
 kinfolk.initializeBaseVariables(
       "http://localhost:8080/test", "identifier", "secret");
       
-/// getting client (service with Access Token) in first time after login
+/// getting client (service with Access Token) in first time with login,password
 oauth2.Client client = await kinfolk.getToken("admin", "admin");
 
 ///  url to service 
