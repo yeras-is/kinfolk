@@ -16,10 +16,10 @@ void main() {
   test("Global Variables", () {
     final calculator = Kinfolk();
     calculator.initializeBaseVariables(
-        "http://localhost:8080/test/", "client", "secret");
+        "http://localhost:8080/test", "client", "secret");
     expect(GlobalVariables.secret, "secret");
     expect(GlobalVariables.identifier, "client");
-    expect(GlobalVariables.urlEndPoint, "http://localhost:8080/test/");
+    expect(GlobalVariables.urlEndPoint, "http://localhost:8080/test");
 
     calculator.initializeBaseVariables(null, null, null);
     expect(() => GlobalVariables.secret,
@@ -33,17 +33,17 @@ void main() {
   test("Acess Token", () {
     final calculator = Kinfolk();
     calculator.initializeBaseVariables(
-        "http://localhost:8080/test/", "client", "secret");
+        "http://localhost:8080/test", "client", "secret");
     expect(GlobalVariables.secret, "secret");
     expect(GlobalVariables.identifier, "client");
-    expect(GlobalVariables.urlEndPoint, "http://localhost:8080/test/");
+    expect(GlobalVariables.urlEndPoint, "http://localhost:8080/test");
     expect(calculator.getToken("admin", "admin"), isNotNull);
   });
 
   test("File Url", () {
     final calculator = Kinfolk();
     calculator.initializeBaseVariables(
-        "http://localhost:8080/test/", "client", "secret");
+        "http://localhost:8080/test", "client", "secret");
     expect(calculator.getToken("admin", "admin"), isNotNull);
 
     expect(calculator.getFileUrl("123"),
