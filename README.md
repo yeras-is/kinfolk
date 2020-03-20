@@ -60,8 +60,8 @@ String url2 = "${kinfolk.serviceUrl}test_SomeService/setToDoList";
 ///  request body 
 String body = """
       {
-      "monday":"work";
-      "sunday":"relax";
+      "monday":"work",
+      "sunday":"relax"
       }
   """;
 
