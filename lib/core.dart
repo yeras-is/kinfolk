@@ -31,4 +31,6 @@ class Kinfolk {
   static String createRestUrl(
           String serviceName, String methodName, Types type) =>
       Utils.createRestUrl(serviceName, methodName, type);
+
+  static get appJsonHeader => {'Content-Type': 'application/json'};
 }
