@@ -46,7 +46,7 @@ void main() {
         "http://localhost:8080/test", "client", "secret");
     expect(calculator.getToken("admin", "admin"), isNotNull);
 
-    expect(calculator.getFileUrl("123"),
+    expect(Kinfolk.getFileUrl("123"),
         "http://localhost:8080/test/rest/v2/files/123");
   });
 }
