@@ -32,46 +32,49 @@ then run.  packages get
 ```dart
 /// initialize service
 Kinfolk kinfolk = Kinfolk();
+
 /// setting server url and security keys (identifier,secter)
 kinfolk.initializeBaseVariables(
-      "http://localhost:8080/test", "identifier", "secret");
-      
+      "https://apps.uco.kz/krj", "client", "secret");
+
 /// getting client (service with Access Token) in first time with login,password
-oauth2.Client client = await kinfolk.getToken("admin", "admin");
+oauth2.Client client = await kinfolk.getToken("kim.v", "123");
 
 ///  url to service 
-///  [kinfolk.serviceUrl] - getting completed service url http://localhost:8080/test/v2/services/
 ///  test_SomeService  -  service name 
 ///  getToDoList - method name
-String url = "${kinfolk.serviceUrl}test_SomeService/getToDoList";
+///  Types - enum
+String url =
+    Kinfolk.createRestUrl("test_SomeService", "getToDoList", Types.services);
 
 // getting response from server. GET method
-var response = await client.get(url,
-      headers: {'Content-Type': 'application/json'});
+var response = await client.get(url, headers: Kinfolk.appJsonHeader);
+
 /// printing body of response
 print("${response.body}");
 
-/// getting client from saved Access Token
-oauth2.Client client2 = await kinfolk.getClient();
-
 ///  url to service 
-String url2 = "${kinfolk.serviceUrl}test_SomeService/setToDoList";
+String url2 =
+    Kinfolk.createRestUrl("test_SomeService", "setToDoList", Types.services);
 
 ///  request body 
 String body = """
-      {
-      "monday":"work",
-      "sunday":"relax"
-      }
-  """;
+    {
+    "monday":"work",
+     "sunday":"relax"
+    }
+""";
+
+/// getting client from saved Access Token
+oauth2.Client client2 = await Kinfolk.getClient();
 
 // getting response from server. POST method
-var response2 = await client2.post(
-      url2,
-      body: body,
-      headers: {'Content-Type': 'application/json'});
+var response2 =
+    await client2.post(url, body: body, headers: Kinfolk.appJsonHeader);
+
 /// printing body of response
-print("${response2.body}");
+print("1       ${response2.body}");
+
 ```
 
 
