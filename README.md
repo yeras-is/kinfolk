@@ -39,7 +39,7 @@ kinfolk.initializeBaseVariables(
       "http://localhost:8080/test", "client", "secret");
 
 /// getting client (service with Access Token) in first time with login,password
-oauth2.Client client = await kinfolk.getToken("kim.v", "123");
+oauth2.Client client = await kinfolk.getToken("admin", "admin");
 
 ///  url to service 
 ///  test_SomeService  -  service name 
