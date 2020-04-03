@@ -35,7 +35,7 @@ class Authorization {
     }
     token = _client.credentials.accessToken;
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path,"credentials.json");
+    String path = join(documentsDirectory.path, "credentials.json");
     File credentialsFile = File(path);
     await credentialsFile.writeAsString(_client.credentials.toJson());
     return _client;
@@ -43,7 +43,7 @@ class Authorization {
 
   getFromSavedCredentials() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path,"credentials.json");
+    String path = join(documentsDirectory.path, "credentials.json");
     File credentialsFile = File(path);
     var exists = await credentialsFile.exists();
     // If the OAuth2 credentials have already been saved from a previous run, we

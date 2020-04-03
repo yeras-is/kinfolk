@@ -1,4 +1,4 @@
-# core
+# kinfolk
 
 A new Flutter package for integration with CUBA Platform based backend.
 
@@ -21,9 +21,7 @@ in your pubspec.yaml add dependency
 dependencies:
   flutter:
     sdk: flutter
-  core:
-    git:
-      url: git://github.com/yeras-is/core
+  kinfolk: ^0.0.3
 ```
 then run.  packages get
 
