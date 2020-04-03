@@ -1,8 +1,8 @@
 import 'file:///C:/Users/maiha/AndroidStudioProjects/core/lib/service/exceptions.dart';
-import 'package:core/global_variables.dart';
+import 'package:kinfolk/global_variables.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:core/core.dart';
+import 'package:kinfolk/kinfolk.dart';
 
 void main() {
   test('adds one to input values', () {

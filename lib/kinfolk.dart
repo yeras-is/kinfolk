@@ -1,7 +1,7 @@
-library core;
+library kinfolk;
 
-import 'package:core/global_variables.dart';
-import 'package:core/service/utils.dart';
+import 'package:kinfolk/global_variables.dart';
+import 'package:kinfolk/service/utils.dart';
 import 'model/url_types.dart';
 import 'service/auth.dart';
 

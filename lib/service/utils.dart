@@ -1,4 +1,4 @@
-import 'package:core/model/url_types.dart';
+import 'package:kinfolk/model/url_types.dart';
 
 import '../global_variables.dart';
 
