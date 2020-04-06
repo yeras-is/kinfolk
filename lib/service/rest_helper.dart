@@ -12,7 +12,7 @@ class RestHelper {
       @required String methodName,
       @required Types type,
       String body,
-      @required dynamic Function(Map<String, dynamic> json) fromMap}) async {
+      @required  Function(Map<String, dynamic> json) fromMap}) async {
     String url = Kinfolk.createRestUrl(serviceName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
@@ -35,7 +35,7 @@ class RestHelper {
       @required String methodName,
       @required Types type,
       String body,
-      @required dynamic Function(Map<String, dynamic> json) fromMap}) async {
+      @required  Function(Map<String, dynamic> json) fromMap}) async {
     String url = Kinfolk.createRestUrl(serviceName, methodName, type);
     oauth2.Client client = await Authorization().client;
 

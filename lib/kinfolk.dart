@@ -39,7 +39,7 @@ class Kinfolk {
           @required String methodName,
           @required Types type,
           String body,
-          @required dynamic Function(Map<String, dynamic> json) fromMap}) async =>
+          @required  Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getListModelRest(
           serviceName: serviceName,
           methodName: methodName,
@@ -52,7 +52,7 @@ class Kinfolk {
           @required String methodName,
           @required Types type,
           String body,
-          @required dynamic Function(Map<String, dynamic> json) fromMap}) async =>
+          @required  Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getSingleModelRest(
           serviceName: serviceName,
           methodName: methodName,
