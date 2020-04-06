@@ -39,12 +39,12 @@ class Kinfolk {
           @required String methodName,
           @required Types type,
           String body,
-          @required model}) async =>
+          @required dynamic Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getListModelRest(
           serviceName: serviceName,
           methodName: methodName,
           type: type,
-          model: model,
+          fromMap: fromMap,
           body: body);
 
   static getSingleModelRest(
@@ -52,12 +52,12 @@ class Kinfolk {
           @required String methodName,
           @required Types type,
           String body,
-          @required model}) async =>
+          @required dynamic Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getSingleModelRest(
           serviceName: serviceName,
           methodName: methodName,
           type: type,
-          model: model,
+          fromMap: fromMap,
           body: body);
 
   static get appJsonHeader => {'Content-Type': 'application/json'};
