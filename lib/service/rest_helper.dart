@@ -12,7 +12,7 @@ class RestHelper {
       @required String methodName,
       @required Types type,
       String body,
-      @required model}) async {
+      @required dynamic Function(Map<String, dynamic> json) fromMap}) async {
     String url = Kinfolk.createRestUrl(serviceName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
@@ -27,7 +27,7 @@ class RestHelper {
     var source = jsonDecode(response.body);
     assert(source is Map);
 
-    return model.fromMap(source);
+    return fromMap(source);
   }
 
   getListModelRest(
@@ -35,7 +35,7 @@ class RestHelper {
       @required String methodName,
       @required Types type,
       String body,
-      @required model}) async {
+      @required dynamic Function(Map<String, dynamic> json) fromMap}) async {
     String url = Kinfolk.createRestUrl(serviceName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
@@ -52,7 +52,7 @@ class RestHelper {
 
     List list = List();
 
-    source.forEach((item) => list.add(model.fromMap(item)));
+    source.forEach((item) => list.add(fromMap(item)));
 
     return list;
   }
