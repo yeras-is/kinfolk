@@ -9,3 +9,7 @@
 ## [0.0.3] - 03.04.2020
 
 * Prepared for publishing
+
+## [0.0.4] - 06.04.2020
+
+* Added simple getting Single and List models

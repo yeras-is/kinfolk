@@ -27,13 +27,16 @@ class Kinfolk {
   getToken(String login, String password) async =>
       await Authorization().getAccessToken(login, password);
 
+  /// getting getFileUrl
   static getFileUrl(String fileDescriptorId) =>
       Authorization().getFileUrlByFileDescriptorId(fileDescriptorId);
 
+  /// create Rest Url
   static String createRestUrl(
           String serviceName, String methodName, Types type) =>
       Utils.createRestUrl(serviceName, methodName, type);
 
+  /// getting list<dynamic> from REST 
   static getListModelRest(
           {@required String serviceName,
           @required String methodName,
@@ -47,6 +50,7 @@ class Kinfolk {
           fromMap: fromMap,
           body: body);
 
+  ///  getting model from REST
   static getSingleModelRest(
           {@required String serviceName,
           @required String methodName,

@@ -21,7 +21,7 @@ in your pubspec.yaml add dependency
 dependencies:
   flutter:
     sdk: flutter
-  kinfolk: ^0.0.3
+  kinfolk: ^0.0.4
 ```
 then run.  packages get
 
@@ -38,21 +38,70 @@ kinfolk.initializeBaseVariables("http://localhost:8080/test", "client", "secret"
 /// getting client (service with Access Token) in first time with login,password
 oauth2.Client client = await kinfolk.getToken("admin", "admin");
 
-///  url to service 
+///  getting single model
 ///  test_SomeService  -  service name 
 ///  getToDoList - method name
 ///  Types - enum
-String url =
-    Kinfolk.createRestUrl("test_SomeService", "getToDoList", Types.services);
+/// formMap - function converting Map<String, dynamic> map to your Model
+ToDoList model =
+    Kinfolk.getSingleModelRest(
+      serviceName: "test_SomeService", 
+      methodName: "getToDoList", 
+      type: Types.services, 
+      fromMap: (Map<String, dynamic> val)=> ToDoList.fromMap(val));
 
-// getting response from server. GET method
-var response = await client.get(url, headers: Kinfolk.appJsonHeader);
+String body = """
+    {
+    "monday":"work",
+     "sunday":"relax"
+    }
+""";
 
-/// printing body of response
-print("${response.body}");
+///  getting single model with request body
+///  test_SomeService  -  service name 
+///  getToDoList - method name
+///  Types - enum
+///  body - request body
+/// formMap - function converting Map<String, dynamic> map to your Model
+ToDoList model =
+    Kinfolk.getSingleModelRest(
+      serviceName: "test_SomeService", 
+      methodName: "getToDoList", 
+      type: Types.services, 
+      body: body,
+      fromMap: (Map<String, dynamic> val)=> ToDoList.fromMap(val));
+
+///  getting models list
+///  test_SomeService  -  service name 
+///  getToDoList - method name
+///  Types - enum
+/// formMap - function converting Map<String, dynamic> map to your Model
+List<dynamic> modelsList =
+    Kinfolk.getListModelRest(
+      serviceName: "test_SomeService", 
+      methodName: "getToDoList", 
+      type: Types.services, 
+      fromMap: (Map<String, dynamic> val)=> ToDoList.fromMap(val));
+
+///  getting models list with request body
+///  test_SomeService  -  service name 
+///  getToDoList - method name
+///  Types - enum
+///  body - request body
+/// formMap - function converting Map<String, dynamic> map to your Model
+List<dynamic> modelsList =
+    Kinfolk.getListModelRest(
+      serviceName: "test_SomeService", 
+      methodName: "getToDoList", 
+      type: Types.services, 
+      body: body,
+      fromMap: (Map<String, dynamic> val)=> ToDoList.fromMap(val));
+
+
+/// Manual rest service usage. only if you want full control
 
 ///  url to service 
-String url2 =
+String url =
     Kinfolk.createRestUrl("test_SomeService", "setToDoList", Types.services);
 
 ///  request body 
@@ -64,14 +113,14 @@ String body = """
 """;
 
 /// getting client from saved Access Token
-oauth2.Client client2 = await Kinfolk.getClient();
+oauth2.Client client = await Kinfolk.getClient();
 
 // getting response from server. POST method
-var response2 =
-    await client2.post(url, body: body, headers: Kinfolk.appJsonHeader);
+var response =
+    await client.post(url, body: body, headers: Kinfolk.appJsonHeader);
 
 /// printing body of response
-print("1       ${response2.body}");
+print("${response.body}");
 
 ```
 
