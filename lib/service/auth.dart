@@ -6,7 +6,6 @@ import 'dart:io';
 /// @author yeras-is
 class Authorization {
   oauth2.Client _client;
-  String token;
 
   Future<oauth2.Client> get client async {
     if (_client != null) return _client;
@@ -31,7 +30,7 @@ class Authorization {
     } on FormatException catch (e) {
       return e.message;
     }
-    token = _client.credentials.accessToken;
+    GlobalVariables.token = _client.credentials.accessToken;
 
     var box = await Hive.openBox('credentials');
     box.put('json', _client.credentials.toJson());
@@ -57,12 +56,12 @@ class Authorization {
       } on FormatException catch (e) {
         return e.message;
       }
-      token = _client.credentials.accessToken;
+      GlobalVariables.token = _client.credentials.accessToken;
       return _client;
     } else
       return null;
   }
 
   getFileUrlByFileDescriptorId(String fileDescriptorId) =>
-      "${GlobalVariables.urlEndPoint}/rest/v2/files/$fileDescriptorId?access_token=$token";
+      "${GlobalVariables.urlEndPoint}/rest/v2/files/$fileDescriptorId?access_token=${GlobalVariables.token}";
 }

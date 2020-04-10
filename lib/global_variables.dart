@@ -4,6 +4,7 @@ class GlobalVariables {
   static String _urlEndPoint;
   static String _identifier;
   static String _secret;
+  static String token;
 
   static final String connectionTimeCode = "CONNECTION_TIME_OUT";
   static final String accessErrorCode = "ACCESS_ERROR";
@@ -26,9 +27,11 @@ class GlobalVariables {
     return _urlEndPoint;
   }
 
+  
   static set urlEndPoint(String value) => _urlEndPoint = value;
 
   static set identifier(String value) => _identifier = value;
 
   static set secret(String value) => _secret = value;
+
 }

@@ -17,3 +17,7 @@
 ## [0.0.5] - 10.04.2020
 
 * Added Hive, for integration with Flutter Web 
+
+## [0.0.6] - 10.04.2020
+
+*  fix bug in access token
