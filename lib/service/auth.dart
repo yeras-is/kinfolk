@@ -33,18 +33,22 @@ class Authorization {
       return e.message;
     }
     token = _client.credentials.accessToken;
-    var box = Hive.box('credentials');
+
+    var box = await Hive.openBox('credentials');
     box.put('json', _client.credentials.toJson());
     var name = box.get('json');
     print('JSON  $name');
+    box.close();
     return _client;
   }
 
   getFromSavedCredentials() async {
-    var box = Hive.box('credentials');
+    var box = await Hive.openBox('credentials');
     box.put('json', _client.credentials.toJson());
     var name = box.get('json');
     print('JSON  $name');
+    box.close();
+
     // If the OAuth2 credentials have already been saved from a previous run, we
     // just want to reload them.
     if (name != null) {
