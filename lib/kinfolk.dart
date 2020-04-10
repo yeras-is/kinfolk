@@ -17,11 +17,10 @@ class Kinfolk {
 
   /// setting server url and security keys (identifier,secret)
   void initializeBaseVariables(
-      String urlEndPoint, String identifier, String secret) async {
+      String urlEndPoint, String identifier, String secret, String path) async {
     GlobalVariables.urlEndPoint = urlEndPoint;
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;
-    var path = Directory.current.path;
     print("PATH: $path");
     Hive..init(path);
   }
