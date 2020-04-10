@@ -44,7 +44,6 @@ class Authorization {
 
   getFromSavedCredentials() async {
     var box = await Hive.openBox('credentials');
-    box.put('json', _client.credentials.toJson());
     var name = box.get('json');
     print('JSON  $name');
     box.close();
