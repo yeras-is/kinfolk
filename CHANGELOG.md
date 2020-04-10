@@ -13,3 +13,7 @@
 ## [0.0.4] - 06.04.2020
 
 * Added simple getting Single and List models
+
+## [0.0.5] - 10.04.2020
+
+* Added Hive, for integration with Flutter Web 

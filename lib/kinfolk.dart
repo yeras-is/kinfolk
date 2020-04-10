@@ -21,7 +21,6 @@ class Kinfolk {
     GlobalVariables.urlEndPoint = urlEndPoint;
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;
-    print("PATH: $path");
     Hive..init(path);
   }
 
