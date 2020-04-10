@@ -1,6 +1,9 @@
 library kinfolk;
 
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
 import 'package:kinfolk/global_variables.dart';
 import 'package:kinfolk/service/rest_helper.dart';
 import 'package:kinfolk/service/utils.dart';
@@ -18,6 +21,9 @@ class Kinfolk {
     GlobalVariables.urlEndPoint = urlEndPoint;
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;
+    var path = Directory.current.path;
+    print("PATH: $path");
+    Hive..init(path);
   }
 
   /// getting client from saved Access Token
@@ -36,13 +42,13 @@ class Kinfolk {
           String serviceName, String methodName, Types type) =>
       Utils.createRestUrl(serviceName, methodName, type);
 
-  /// getting list<dynamic> from REST 
+  /// getting list<dynamic> from REST
   static getListModelRest(
           {@required String serviceName,
           @required String methodName,
           @required Types type,
           String body,
-          @required  Function(Map<String, dynamic> json) fromMap}) async =>
+          @required Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getListModelRest(
           serviceName: serviceName,
           methodName: methodName,
@@ -56,7 +62,7 @@ class Kinfolk {
           @required String methodName,
           @required Types type,
           String body,
-          @required  Function(Map<String, dynamic> json) fromMap}) async =>
+          @required Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getSingleModelRest(
           serviceName: serviceName,
           methodName: methodName,
