@@ -14,7 +14,7 @@ class Kinfolk {
 
   /// setting server url and security keys (identifier,secret)
   void initializeBaseVariables(
-      String urlEndPoint, String identifier, String secret) {
+      String urlEndPoint, String identifier, String secret) async {
     GlobalVariables.urlEndPoint = urlEndPoint;
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;

@@ -1,9 +1,8 @@
+import 'package:hive/hive.dart';
 import 'package:kinfolk/global_variables.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'dart:io';
 import 'package:path/path.dart' show join;
-
-import 'package:path_provider/path_provider.dart';
 
 /// @author yeras-is
 class Authorization {
@@ -34,23 +33,22 @@ class Authorization {
       return e.message;
     }
     token = _client.credentials.accessToken;
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "credentials.json");
-    File credentialsFile = File(path);
-    await credentialsFile.writeAsString(_client.credentials.toJson());
+    var box = Hive.box('credentials');
+    box.put('json', _client.credentials.toJson());
+    var name = box.get('json');
+    print('JSON  $name');
     return _client;
   }
 
   getFromSavedCredentials() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "credentials.json");
-    File credentialsFile = File(path);
-    var exists = await credentialsFile.exists();
+    var box = Hive.box('credentials');
+    box.put('json', _client.credentials.toJson());
+    var name = box.get('json');
+    print('JSON  $name');
     // If the OAuth2 credentials have already been saved from a previous run, we
     // just want to reload them.
-    if (exists) {
-      var credentials =
-          new oauth2.Credentials.fromJson(await credentialsFile.readAsString());
+    if (name != null) {
+      var credentials = new oauth2.Credentials.fromJson(name);
       try {
         _client = oauth2.Client(credentials,
             identifier: GlobalVariables.identifier,

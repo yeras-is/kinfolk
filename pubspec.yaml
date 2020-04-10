@@ -3,7 +3,7 @@ description: A new Flutter package for integration with CUBA Platform based back
 version: 0.0.4
 author: yeras-is <maihanov96@gmail.com>
 homepage: https://github.com/yeras-is/kinfolk
- 
+
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
@@ -11,18 +11,18 @@ dependencies:
   flutter:
     sdk: flutter
   oauth2: ^1.5.0
-  path_provider: ^1.6.5
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  hive_generator: ^0.7.0+2
+  build_runner: ^1.8.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -33,7 +33,6 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # To add custom fonts to your package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
