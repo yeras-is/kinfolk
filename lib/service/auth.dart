@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:kinfolk/global_variables.dart';
+import 'package:kinfolk/service/utils.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'dart:io';
 
@@ -32,15 +33,17 @@ class Authorization {
     }
     GlobalVariables.token = _client.credentials.accessToken;
 
-    var box = await Hive.openBox('credentials');
-    box.put('json', _client.credentials.toJson());
+    Box box = await HiveService.getBox('credentials');
+    await box.put('json', _client.credentials.toJson());
+    await box.close();
     return _client;
   }
 
   getFromSavedCredentials() async {
-    var box = Hive.box('credentials');
+    Box box = await HiveService.getBox('credentials');
     var name = box.get('json');
-
+    await box.close();
+    
     // If the OAuth2 credentials have already been saved from a previous run, we
     // just want to reload them.
     if (name != null) {
