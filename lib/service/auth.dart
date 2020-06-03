@@ -39,7 +39,7 @@ class Authorization {
   }
 
   getFromSavedCredentials() async {
-    Box box = HiveService.getBox('credentials');
+    Box box = await HiveService.getBox('credentials');
     var name = box.get('json');
 
 
