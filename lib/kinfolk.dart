@@ -9,6 +9,7 @@ import 'package:kinfolk/service/rest_helper.dart';
 import 'package:kinfolk/service/utils.dart';
 import 'model/url_types.dart';
 import 'service/auth.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class Kinfolk {
   /// A Calculator.
@@ -17,11 +18,11 @@ class Kinfolk {
 
   /// setting server url and security keys (identifier,secret)
   void initializeBaseVariables(
-      String urlEndPoint, String identifier, String secret, String path) async {
+      String urlEndPoint, String identifier, String secret) async {
     GlobalVariables.urlEndPoint = urlEndPoint;
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;
-    Hive..init(path);
+    await Hive.initFlutter();
   }
 
   /// getting client from saved Access Token
