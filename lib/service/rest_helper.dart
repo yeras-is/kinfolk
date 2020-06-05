@@ -12,7 +12,7 @@ class RestHelper {
       @required String methodName,
       @required Types type,
       String body,
-      @required  Function(Map<String, dynamic> json) fromMap}) async {
+      @required Function(Map<String, dynamic> json) fromMap}) async {
     String url = Kinfolk.createRestUrl(serviceName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
@@ -24,7 +24,11 @@ class RestHelper {
       response = await getGetResponse(url: url, client: client);
     }
 
-    var source = jsonDecode(response.body);
+    var respBody = response.body;
+    if (respBody.runtimeType == String && respBody.isEmpty) {
+      return null;
+    }
+    var source = jsonDecode(respBody);
     assert(source is Map);
 
     return fromMap(source);
@@ -35,7 +39,7 @@ class RestHelper {
       @required String methodName,
       @required Types type,
       String body,
-      @required  Function(Map<String, dynamic> json) fromMap}) async {
+      @required Function(Map<String, dynamic> json) fromMap}) async {
     String url = Kinfolk.createRestUrl(serviceName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
