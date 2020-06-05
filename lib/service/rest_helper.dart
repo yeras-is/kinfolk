@@ -51,7 +51,11 @@ class RestHelper {
       response = await getGetResponse(url: url, client: client);
     }
 
-    var source = jsonDecode(response.body);
+    var respBody = response.body;
+    if (respBody.runtimeType == String && respBody.isEmpty) {
+      return null;
+    }
+    var source = jsonDecode(respBody);
     assert(source is List);
 
     List list = List();
