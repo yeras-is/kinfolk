@@ -5,17 +5,25 @@ author: yeras-is <maihanov96@gmail.com>
 homepage: https://github.com/yeras-is/kinfolk
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
+
 
 dependencies:
   flutter:
     sdk: flutter
   oauth2: ^1.5.0
-  hive: ^1.4.1+1
-  hive_flutter: ^0.3.0+2
+  hive:
+  hive_flutter:
+    git:
+      url: git://github.com/hivedb/hive.git
+      path: hive_flutter
+
 
 dev_dependencies:
-  hive_generator: ^0.7.0+2
+  hive_generator:
+    git:
+      url: git://github.com/hivedb/hive.git
+      path: hive_generator
   build_runner: ^1.8.1
 
 
