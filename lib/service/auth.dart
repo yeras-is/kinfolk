@@ -31,7 +31,7 @@ class Authorization {
     } on FormatException catch (e) {
       return e.message;
     } on HandshakeException catch (e) {
-      return e.message;
+      return e.toString();
     }
     GlobalVariables.token = _client.credentials.accessToken;
 
