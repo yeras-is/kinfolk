@@ -30,6 +30,8 @@ class Authorization {
       return GlobalVariables.accessErrorCode;
     } on FormatException catch (e) {
       return e.message;
+    } on HandshakeException catch (e) {
+      return e.message;
     }
     GlobalVariables.token = _client.credentials.accessToken;
 
@@ -41,7 +43,6 @@ class Authorization {
   getFromSavedCredentials() async {
     Box box = await HiveService.getBox('credentials');
     var name = box.get('json');
-
 
     // If the OAuth2 credentials have already been saved from a previous run, we
     // just want to reload them.
