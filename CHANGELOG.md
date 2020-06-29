@@ -21,3 +21,7 @@
 ## [0.0.6] - 10.04.2020
 
 *  fix bug in access token
+
+## [0.0.7] - 10.04.2020
+
+*  fix bugs in access token
