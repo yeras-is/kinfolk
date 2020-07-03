@@ -2,18 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:kinfolk/kinfolk.dart';
+import 'package:kinfolk/model/cuba_entity_filter.dart';
 import 'package:kinfolk/model/url_types.dart';
 import 'package:kinfolk/service/auth.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 class RestHelper {
-  getSingleModelRest(
-      {@required String serviceName,
-      @required String methodName,
-      @required Types type,
-      String body,
-      @required Function(Map<String, dynamic> json) fromMap}) async {
-    String url = Kinfolk.createRestUrl(serviceName, methodName, type);
+  getSingleModelRest({
+    @required String serviceOrEntityName,
+    @required String methodName,
+    @required Types type,
+    String body,
+    @required Function(Map<String, dynamic> json) fromMap,
+  }) async {
+    String url = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
     var response;
@@ -34,29 +36,43 @@ class RestHelper {
     return fromMap(source);
   }
 
-  getListModelRest(
-      {@required String serviceName,
-      @required String methodName,
-      @required Types type,
-      String body,
-      @required Function(Map<String, dynamic> json) fromMap}) async {
-    String url = Kinfolk.createRestUrl(serviceName, methodName, type);
+  getListModelRest({
+    @required String serviceOrEntityName,
+    @required String methodName,
+    @required Types type,
+    String body,
+    @required Function(Map<String, dynamic> json) fromMap,
+    CubaEntityFilter filter,
+  }) async {
+    String url = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
     oauth2.Client client = await Authorization().client;
 
     var response;
 
-    if (body != null) {
-      response = await getPostResponse(url: url, body: body, client: client);
+    if (filter != null) {
+      assert(type == Types.entities,
+          "Filter can be used only with Types.entities");
+      response = await getPostResponse(
+        url: url,
+        body: filter.toJson(),
+        client: client,
+      );
     } else {
-      response = await getGetResponse(url: url, client: client);
+      if (body != null) {
+        response = await getPostResponse(url: url, body: body, client: client);
+      } else {
+        response = await getGetResponse(url: url, client: client);
+      }
     }
-
     var respBody = response.body;
     if (respBody.runtimeType == String && respBody.isEmpty) {
       return null;
     }
     var source = jsonDecode(respBody);
-    assert(source is List);
+    assert(
+      source is List,
+      "Response is" + "\n$respBody",
+    );
 
     List list = List();
 

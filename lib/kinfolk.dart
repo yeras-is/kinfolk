@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:kinfolk/global_variables.dart';
 import 'package:kinfolk/service/rest_helper.dart';
 import 'package:kinfolk/service/utils.dart';
+import 'model/cuba_entity_filter.dart';
 import 'model/url_types.dart';
 import 'service/auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -43,16 +44,18 @@ class Kinfolk {
 
   /// getting list<dynamic> from REST
   static getListModelRest(
-          {@required String serviceName,
+          {@required String serviceOrEntityName,
           @required String methodName,
           @required Types type,
           String body,
+          CubaEntityFilter filter,
           @required Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getListModelRest(
-          serviceName: serviceName,
+          serviceOrEntityName: serviceOrEntityName,
           methodName: methodName,
           type: type,
           fromMap: fromMap,
+          filter: filter,
           body: body);
 
   ///  getting model from REST
@@ -63,7 +66,7 @@ class Kinfolk {
           String body,
           @required Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getSingleModelRest(
-          serviceName: serviceName,
+          serviceOrEntityName: serviceName,
           methodName: methodName,
           type: type,
           fromMap: fromMap,
