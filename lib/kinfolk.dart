@@ -44,12 +44,12 @@ class Kinfolk {
 
   /// getting list<dynamic> from REST
   static getListModelRest(
-          {@required String serviceOrEntityName,
-          @required String methodName,
-          @required Types type,
-          String body,
-          CubaEntityFilter filter,
-          @required Function(Map<String, dynamic> json) fromMap}) async =>
+          {required String serviceOrEntityName,
+          required String methodName,
+          required Types type,
+          String? body,
+          CubaEntityFilter? filter,
+          required Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getListModelRest(
           serviceOrEntityName: serviceOrEntityName,
           methodName: methodName,
@@ -60,11 +60,11 @@ class Kinfolk {
 
   ///  getting model from REST
   static getSingleModelRest(
-          {@required String serviceName,
-          @required String methodName,
-          @required Types type,
-          String body,
-          @required Function(Map<String, dynamic> json) fromMap}) async =>
+          {required String serviceName,
+          required String methodName,
+          required Types type,
+          String? body,
+          required Function(Map<String, dynamic> json) fromMap}) async =>
       await RestHelper().getSingleModelRest(
           serviceOrEntityName: serviceName,
           methodName: methodName,

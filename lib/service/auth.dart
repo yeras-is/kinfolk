@@ -6,9 +6,9 @@ import 'dart:io';
 
 /// @author yeras-is
 class Authorization {
-  oauth2.Client _client;
+  oauth2.Client? _client;
 
-  Future<oauth2.Client> get client async {
+  Future<oauth2.Client?> get client async {
     if (_client != null) return _client;
     // if _client is null we instantiate it
     _client = await getFromSavedCredentials();
@@ -17,7 +17,7 @@ class Authorization {
 
   getAccessToken(String username, String password) async {
     final authorizationEndpoint =
-        Uri.parse(GlobalVariables.urlEndPoint + "/rest/v2/oauth/token?");
+        Uri.parse(GlobalVariables.urlEndPoint! + "/rest/v2/oauth/token?");
 
     try {
       _client = await oauth2.resourceOwnerPasswordGrant(
@@ -33,10 +33,10 @@ class Authorization {
     } on HandshakeException catch (e) {
       return e.toString();
     }
-    GlobalVariables.token = _client.credentials.accessToken;
+    GlobalVariables.token = _client!.credentials.accessToken;
 
     var box = await Hive.openBox('credentials');
-    box.put('json', _client.credentials.toJson());
+    box.put('json', _client!.credentials.toJson());
     return _client;
   }
 
@@ -59,7 +59,7 @@ class Authorization {
       } on FormatException catch (e) {
         return e.message;
       }
-      GlobalVariables.token = _client.credentials.accessToken;
+      GlobalVariables.token = _client!.credentials.accessToken;
       return _client;
     } else
       return null;

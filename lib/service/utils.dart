@@ -10,7 +10,7 @@ class Utils {
   /// creating REST url : http://localhost:8080/test/v2/queries/entityName/queryName
   static String createRestUrl(
       String serviceOrEntityName, String methodNameOrEntityId, Types type) {
-    String urlSuffix = UrlTypes.path[type];
+    String? urlSuffix = UrlTypes.path[type];
     return "${GlobalVariables.urlEndPoint}/rest/v2/$urlSuffix/$serviceOrEntityName/$methodNameOrEntityId";
   }
 }

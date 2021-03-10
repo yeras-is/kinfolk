@@ -5,13 +5,13 @@ import 'package:kinfolk/model/url_types.dart';
 
 class CubaEntityFilter {
   CubaEntityFilter({
-    @required this.filter,
+    required this.filter,
     this.view,
     this.returnCount,
     this.limit,
     this.offset,
     this.sort,
-    SortTypes sortType,
+    SortTypes? sortType,
   }) {
     if (sort != null) {
       this.sort = "${(sortType == SortTypes.asc ? "-" : "+")}${this.sort}";
@@ -19,11 +19,11 @@ class CubaEntityFilter {
   }
 
   Filter filter;
-  String view;
-  bool returnCount;
-  int limit;
-  int offset;
-  String sort;
+  String? view;
+  bool? returnCount;
+  int? limit;
+  int? offset;
+  String? sort;
 
   factory CubaEntityFilter.fromJson(String str) =>
       CubaEntityFilter.fromMap(json.decode(str));
@@ -53,7 +53,7 @@ class CubaEntityFilter {
 
 class Filter {
   Filter({
-    @required this.conditions,
+    required this.conditions,
   });
 
   List<FilterCondition> conditions;
@@ -77,16 +77,16 @@ class FilterCondition {
     this.group,
     this.conditions,
     this.property,
-    Operators conditionOperator,
+    Operators? conditionOperator,
     this.value,
   }) {
-    this.conditionOperator = ConditionsOperators.operators[conditionOperator];
+    this.conditionOperator = ConditionsOperators.operators[conditionOperator!];
   }
 
-  String group;
-  List<ConditionCondition> conditions;
-  String property;
-  String conditionOperator;
+  String? group;
+  List<ConditionCondition>? conditions;
+  String? property;
+  String? conditionOperator;
   dynamic value;
 
   factory FilterCondition.fromJson(String str) =>
@@ -115,7 +115,7 @@ class FilterCondition {
           "group": group == null ? null : group,
           "conditions": conditions == null
               ? null
-              : List<dynamic>.from(conditions.map((x) => x.toMap())),
+              : List<dynamic>.from(conditions!.map((x) => x.toMap())),
           "property": property == null ? null : property,
           "operator": conditionOperator == null ? null : conditionOperator,
           "value": value,
@@ -124,14 +124,14 @@ class FilterCondition {
 
 class ConditionCondition {
   ConditionCondition(
-      {@required this.property,
-      @required Operators conditionOperator,
-      @required this.value}) {
-    this.conditionOperator = ConditionsOperators.operators[conditionOperator];
+      {required this.property,
+      required Operators? conditionOperator,
+      required this.value}) {
+    this.conditionOperator = ConditionsOperators.operators[conditionOperator!];
   }
 
-  String property;
-  String conditionOperator;
+  String? property;
+  String? conditionOperator;
   dynamic value;
 
   factory ConditionCondition.fromJson(String str) =>

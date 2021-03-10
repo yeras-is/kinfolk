@@ -9,21 +9,21 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 
 class RestHelper {
   getSingleModelRest({
-    @required String serviceOrEntityName,
-    @required String methodName,
-    @required Types type,
-    String body,
-    @required Function(Map<String, dynamic> json) fromMap,
+    required String serviceOrEntityName,
+    required String methodName,
+    required Types type,
+    String? body,
+    required Function(Map<String, dynamic> json) fromMap,
   }) async {
     String url = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
-    oauth2.Client client = await Authorization().client;
+    oauth2.Client? client = await Authorization().client;
 
     var response;
 
     if (body != null) {
-      response = await getPostResponse(url: url, body: body, client: client);
+      response = await getPostResponse(url: url, body: body, client: client!);
     } else {
-      response = await getGetResponse(url: url, client: client);
+      response = await getGetResponse(url: url, client: client!);
     }
 
     var respBody = response.body;
@@ -37,15 +37,15 @@ class RestHelper {
   }
 
   getListModelRest({
-    @required String serviceOrEntityName,
-    @required String methodName,
-    @required Types type,
-    String body,
-    @required Function(Map<String, dynamic> json) fromMap,
-    CubaEntityFilter filter,
+    required String serviceOrEntityName,
+    required String methodName,
+    required Types type,
+    String? body,
+    required Function(Map<String, dynamic> json) fromMap,
+    CubaEntityFilter? filter,
   }) async {
     String url = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
-    oauth2.Client client = await Authorization().client;
+    oauth2.Client? client = await Authorization().client;
 
     var response;
 
@@ -55,13 +55,13 @@ class RestHelper {
       response = await getPostResponse(
         url: url,
         body: filter.toJson(),
-        client: client,
+        client: client!,
       );
     } else {
       if (body != null) {
-        response = await getPostResponse(url: url, body: body, client: client);
+        response = await getPostResponse(url: url, body: body, client: client!);
       } else {
-        response = await getGetResponse(url: url, client: client);
+        response = await getGetResponse(url: url, client: client!);
       }
     }
     var respBody = response.body;
@@ -74,7 +74,7 @@ class RestHelper {
       "Response is" + "\n$respBody",
     );
 
-    List list = List();
+    List list = List.empty();
 
     source.forEach((item) => list.add(fromMap(item)));
 
@@ -82,11 +82,9 @@ class RestHelper {
   }
 
   getPostResponse(
-          {@required url,
-          @required body,
-          @required oauth2.Client client}) async =>
+          {required url, required body, required oauth2.Client client}) async =>
       await client.post(url, body: body, headers: Kinfolk.appJsonHeader);
 
-  getGetResponse({@required url, @required oauth2.Client client}) async =>
+  getGetResponse({required url, required oauth2.Client client}) async =>
       await client.get(url, headers: Kinfolk.appJsonHeader);
 }
