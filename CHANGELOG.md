@@ -1,3 +1,6 @@
+## [1.0.0] - 10.03.2021
+* Null Safety
+
 ## [0.0.8] - 03.06.2020
 * Added entities and queries support
 
