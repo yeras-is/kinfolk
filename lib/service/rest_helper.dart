@@ -15,8 +15,9 @@ class RestHelper {
     String? body,
     required Function(Map<String, dynamic> json) fromMap,
   }) async {
-    String url = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
+    String url_str = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
     oauth2.Client? client = await Authorization().client;
+    Uri url = Uri.parse(url_str);
 
     var response;
 
@@ -44,8 +45,9 @@ class RestHelper {
     required Function(Map<String, dynamic> json) fromMap,
     CubaEntityFilter? filter,
   }) async {
-    String url = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
+    String url_str = Kinfolk.createRestUrl(serviceOrEntityName, methodName, type);
     oauth2.Client? client = await Authorization().client;
+    Uri url = Uri.parse(url_str);
 
     var response;
 
@@ -74,7 +76,7 @@ class RestHelper {
       "Response is" + "\n$respBody",
     );
 
-    List list = List.empty();
+    List list = [];
 
     source.forEach((item) => list.add(fromMap(item)));
 
