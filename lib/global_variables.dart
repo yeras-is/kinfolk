@@ -1,5 +1,6 @@
 import 'service/exceptions.dart';
 
+
 class GlobalVariables {
   static String? _urlEndPoint;
   static String? _identifier;

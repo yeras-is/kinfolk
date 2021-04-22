@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:kinfolk/model/url_types.dart';
-
+import 'dart:developer' as dev;
 import '../global_variables.dart';
 
 class Utils {
@@ -28,7 +28,9 @@ class HiveService {
 
   static getClearBox(String name) async {
     Box box = await getBox(name);
-    await box.clear().catchError((val) => print(val));
+    await box.clear().catchError((val) {
+      dev.log(val);
+    });
     return box;
   }
 }

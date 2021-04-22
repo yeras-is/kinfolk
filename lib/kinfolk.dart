@@ -12,6 +12,8 @@ import 'model/url_types.dart';
 import 'service/auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+String libName = 'KIN';
+
 class Kinfolk {
   /// A Calculator.
   /// Returns [value] plus 1.
@@ -38,8 +40,7 @@ class Kinfolk {
       Authorization().getFileUrlByFileDescriptorId(fileDescriptorId);
 
   /// create Rest Url
-  static String createRestUrl(
-          String serviceName, String methodName, Types type) =>
+  static String createRestUrl(String serviceName, String methodName, Types type) =>
       Utils.createRestUrl(serviceName, methodName, type);
 
   /// getting list<dynamic> from REST
@@ -70,6 +71,19 @@ class Kinfolk {
           methodName: methodName,
           type: type,
           fromMap: fromMap,
+          body: body);
+
+  ///  getting value from REST
+  static getSingleValueRest({
+    required String serviceName,
+    required String methodName,
+    required Types type,
+    String? body,
+  }) async =>
+      await RestHelper().getSingleValueRest(
+          serviceOrEntityName: serviceName,
+          methodName: methodName,
+          type: type,
           body: body);
 
   static get appJsonHeader => {'Content-Type': 'application/json'};

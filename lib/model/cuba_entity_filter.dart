@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:kinfolk/model/url_types.dart';
 
 class CubaEntityFilter {

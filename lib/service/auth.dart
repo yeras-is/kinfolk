@@ -1,8 +1,10 @@
 import 'package:hive/hive.dart';
 import 'package:kinfolk/global_variables.dart';
+import 'package:kinfolk/kinfolk.dart';
 import 'package:kinfolk/service/utils.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'dart:io';
+import 'dart:developer' as dev;
 
 /// @author yeras-is
 class Authorization {
@@ -22,15 +24,18 @@ class Authorization {
     try {
       _client = await oauth2.resourceOwnerPasswordGrant(
           authorizationEndpoint, username, password,
-          identifier: GlobalVariables.identifier,
-          secret: GlobalVariables.secret);
-    } on SocketException {
+          identifier: GlobalVariables.identifier, secret: GlobalVariables.secret);
+    } on SocketException catch (e) {
+      dev.log('Socket Exception', name: libName, error: e);
       return GlobalVariables.connectionTimeCode;
-    } on oauth2.AuthorizationException {
+    } on oauth2.AuthorizationException catch (e) {
+      dev.log('Auth Exception', name: libName, error: e);
       return GlobalVariables.accessErrorCode;
     } on FormatException catch (e) {
+      dev.log('Format Exception', name: libName, error: e);
       return e.message;
     } on HandshakeException catch (e) {
+      dev.log('Socket Exception', name: libName, error: e);
       return e.toString();
     }
     GlobalVariables.token = _client!.credentials.accessToken;
@@ -42,21 +47,23 @@ class Authorization {
 
   getFromSavedCredentials() async {
     Box box = await HiveService.getBox('credentials');
-    var name = box.get('json');
+    var json = box.get('json');
 
     // If the OAuth2 credentials have already been saved from a previous run, we
     // just want to reload them.
-    if (name != null) {
-      var credentials = new oauth2.Credentials.fromJson(name);
+    if (json != null) {
+      var credentials = new oauth2.Credentials.fromJson(json);
       try {
         _client = oauth2.Client(credentials,
-            identifier: GlobalVariables.identifier,
-            secret: GlobalVariables.secret);
-      } on SocketException {
+            identifier: GlobalVariables.identifier, secret: GlobalVariables.secret);
+      } on SocketException catch (e) {
+        dev.log('Socket Exception', name: libName, error: e);
         return GlobalVariables.connectionTimeCode;
-      } on oauth2.AuthorizationException {
+      } on oauth2.AuthorizationException catch (e) {
+        dev.log('Auth Exception', name: libName, error: e);
         return GlobalVariables.accessErrorCode;
       } on FormatException catch (e) {
+        dev.log('Format Exception', name: libName, error: e);
         return e.message;
       }
       GlobalVariables.token = _client!.credentials.accessToken;
