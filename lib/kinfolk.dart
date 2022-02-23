@@ -20,8 +20,7 @@ class Kinfolk {
   int addOne(int value) => value + 1;
 
   /// setting server url and security keys (identifier,secret)
-  void initializeBaseVariables(
-      String urlEndPoint, String identifier, String secret) async {
+  void initializeBaseVariables(String urlEndPoint, String identifier, String secret) async {
     GlobalVariables.urlEndPoint = urlEndPoint;
     GlobalVariables.identifier = identifier;
     GlobalVariables.secret = secret;
@@ -32,46 +31,47 @@ class Kinfolk {
   static getClient() async => await Authorization().client;
 
   /// getting client (service with Access Token) in first time with login,password
-  getToken(String login, String password) async =>
-      await Authorization().getAccessToken(login, password);
+  getToken(String login, String password) async => await Authorization().getAccessToken(login, password);
 
   /// getting getFileUrl
-  static getFileUrl(String fileDescriptorId) =>
-      Authorization().getFileUrlByFileDescriptorId(fileDescriptorId);
+  static getFileUrl(String fileDescriptorId) => Authorization().getFileUrlByFileDescriptorId(fileDescriptorId);
 
   /// create Rest Url
-  static String createRestUrl(String serviceName, String methodName, Types type) =>
-      Utils.createRestUrl(serviceName, methodName, type);
+  static String createRestUrl(String serviceName, String methodName, Types type) => Utils.createRestUrl(serviceName, methodName, type);
 
   /// getting list<dynamic> from REST
-  static getListModelRest(
-          {required String serviceOrEntityName,
-          required String methodName,
-          required Types type,
-          String? body,
-          CubaEntityFilter? filter,
-          required Function(Map<String, dynamic> json) fromMap}) async =>
+  static getListModelRest({
+    required String serviceOrEntityName,
+    required String methodName,
+    required Types type,
+    String? body,
+    CubaEntityFilter? filter,
+    required Function(Map<String, dynamic> json) fromMap,
+  }) async =>
       await RestHelper().getListModelRest(
-          serviceOrEntityName: serviceOrEntityName,
-          methodName: methodName,
-          type: type,
-          fromMap: fromMap,
-          filter: filter,
-          body: body);
+        serviceOrEntityName: serviceOrEntityName,
+        methodName: methodName,
+        type: type,
+        fromMap: fromMap,
+        filter: filter,
+        body: body,
+      );
 
   ///  getting model from REST
-  static getSingleModelRest(
-          {required String serviceName,
-          required String methodName,
-          required Types type,
-          String? body,
-          required Function(Map<String, dynamic> json) fromMap}) async =>
+  static getSingleModelRest({
+    required String serviceName,
+    required String methodName,
+    required Types type,
+    String? body,
+    required Function(Map<String, dynamic> json) fromMap,
+  }) async =>
       await RestHelper().getSingleModelRest(
-          serviceOrEntityName: serviceName,
-          methodName: methodName,
-          type: type,
-          fromMap: fromMap,
-          body: body);
+        serviceOrEntityName: serviceName,
+        methodName: methodName,
+        type: type,
+        fromMap: fromMap,
+        body: body,
+      );
 
   ///  getting value from REST
   static getSingleValueRest({
@@ -81,10 +81,15 @@ class Kinfolk {
     String? body,
   }) async =>
       await RestHelper().getSingleValueRest(
-          serviceOrEntityName: serviceName,
-          methodName: methodName,
-          type: type,
-          body: body);
+        serviceOrEntityName: serviceName,
+        methodName: methodName,
+        type: type,
+        body: body,
+      );
 
-  static get appJsonHeader => {'Content-Type': 'application/json'};
+  static get appJsonHeader => {
+    'Content-Type': 'application/json',
+    'Accept-Language:': GlobalVariables.lang,
+    'Authorization': 'Bearer ${GlobalVariables.token}',
+  };
 }
