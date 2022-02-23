@@ -19,7 +19,7 @@ class Authorization {
 
   getAccessToken(String username, String password) async {
     final authorizationEndpoint =
-        Uri.parse(GlobalVariables.urlEndPoint! + "/rest/v2/oauth/token?");
+    Uri.parse(GlobalVariables.urlEndPoint! + "/rest/v2/oauth/token?");
 
     try {
       _client = await oauth2.resourceOwnerPasswordGrant(
@@ -46,7 +46,7 @@ class Authorization {
   }
 
   getFromSavedCredentials() async {
-    Box box = await HiveService.getBox('credentials');
+    final Box box = await HiveService.getBox('credentials');
     var json = box.get('json');
 
     // If the OAuth2 credentials have already been saved from a previous run, we
